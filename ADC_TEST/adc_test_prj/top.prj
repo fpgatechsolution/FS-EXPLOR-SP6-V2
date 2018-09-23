@@ -1,0 +1,6 @@
+verilog work "ipcore_dir/clk_dcm.v"
+vhdl work "SEVEN_SIGMENT.vhd"
+vhdl work "LCD_CNTROL.vhd"
+verilog work "bintobcd.v"
+vhdl work "adc.vhd"
+vhdl work "top.vhd"

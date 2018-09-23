@@ -1,0 +1,46 @@
+
+
+
+// Instantiate the module
+LCD_CONTROL instance_name (
+    .reset(reset), 
+    .CLK_12MHZ(CLK_12MHZ), 
+    .LCD_RS(LCD_RS), 
+    .LCD_E(LCD_E), 
+    .LCD_RW(LCD_RW), 
+    .C1L1(C1L1), 
+    .C2L1(C2L1), 
+    .C3L1(C3L1), 
+    .C4L1(C4L1), 
+    .C5L1(C5L1), 
+    .C6L1(C6L1), 
+    .C7L1(C7L1), 
+    .C8L1(C8L1), 
+    .C9L1(C9L1), 
+    .C10L1(C10L1), 
+    .C11L1(C11L1), 
+    .C12L1(C12L1), 
+    .C13L1(C13L1), 
+    .C14L1(C14L1), 
+    .C15L1(C15L1), 
+    .C16L1(C16L1), 
+    .C1L2(C1L2), 
+    .C2L2(C2L2), 
+    .C3L2(C3L2), 
+    .C4L2(C4L2), 
+    .C5L2(C5L2), 
+    .C6L2(C6L2), 
+    .C7L2(C7L2), 
+    .C8L2(C8L2), 
+    .C9L2(C9L2), 
+    .C10L2(C10L2), 
+    .C11L2(C11L2), 
+    .C12L2(C12L2), 
+    .C13L2(C13L2), 
+    .C14L2(C14L2), 
+    .C15L2(C15L2), 
+    .C16L2(C16L2), 
+    .DATA_BUS(DATA_BUS)
+    );
+
+

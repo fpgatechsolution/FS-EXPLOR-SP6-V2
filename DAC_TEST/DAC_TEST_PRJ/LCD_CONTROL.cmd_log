@@ -1,0 +1,2 @@
+vhdtdtfi -prj DAC_TEST -o F:/TEST/DAC_TEST/LCD_CONTROL.tfi -module LCD_CONTROL -template C:/Xilinx/14.7/ISE_DS/ISE//data/tfi.tft -deleteonerror -lib work LCD_CNTROL.vhd 
+vhdtdtfi -prj DAC_TEST -o F:/TEST/DAC_TEST/LCD_CONTROL.vhi -module LCD_CONTROL -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work LCD_CNTROL.vhd 

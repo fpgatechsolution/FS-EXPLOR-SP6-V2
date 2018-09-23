@@ -1,0 +1,49 @@
+
+
+
+	NET CLK_12MHZ  LOC = P95  ; 
+		  
+	NET "sck" LOC = P70;
+	NET "cs_adc" LOC = P97;
+	NET "adc_out" LOC = P64;	
+	NET "adc_in" LOC = p65;
+
+
+	NET "reset"  LOC = P105  ; 
+
+
+
+	NET SIG_A  LOC = P119  ; 
+	NET SIG_B  LOC = P118 ; 
+	NET SIG_C  LOC = P117; 
+	NET SIG_D  LOC = P120 ; 
+	NET SIG_E  LOC = P121 ; 
+	NET SIG_F  LOC = P124; 
+	NET SIG_G  LOC = P123 ; 
+	NET SIG_PD  LOC = P116 ; 	 
+
+NET "reset" CLOCK_DEDICATED_ROUTE = FALSE;
+
+
+	NET SEL_DISP1  LOC = P115  ; 
+	NET SEL_DISP2  LOC = P114  ; 
+	NET SEL_DISP3  LOC = P112 ; 
+	NET SEL_DISP4  LOC = P111 ; 
+		  
+	NET lcd_dip  LOC = P29  ; 
+
+ 
+	NET dip_led<0>  LOC = P139  ; 	
+	NET dip_led<1>  LOC = P141  ;
+	NET dip_led<2>  LOC = P143  ;
+	NET dip_led<3>  LOC = P1  ;
+	NET dip_led<4>  LOC = P5  ;
+	NET dip_led<5>  LOC = P7  ;
+	NET dip_led<6>  LOC = P9  ;
+	NET dip_led<7>  LOC = P11  ; 	
+
+	NET dip_led<8>  LOC = P14  ; 	
+	NET dip_led<9>  LOC = P15  ; 	
+
+						
+ 

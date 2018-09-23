@@ -1,0 +1,2 @@
+vhdtdtfi -prj adc_test -o F:/TEST/adc_test/ADC_CONTROL.tfi -module ADC_CONTROL -template C:/Xilinx/14.7/ISE_DS/ISE//data/tfi.tft -deleteonerror -lib work adc.vhd 
+vhdtdtfi -prj adc_test -o F:/TEST/adc_test/ADC_CONTROL.vhi -module ADC_CONTROL -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work adc.vhd 

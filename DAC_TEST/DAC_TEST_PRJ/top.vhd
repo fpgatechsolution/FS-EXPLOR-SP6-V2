@@ -1,0 +1,295 @@
+----------------------------------------------------------------------------------
+-- COMPANY      : FPGATECHSOLUTION
+-- MODULE NAME  : TOP
+-- URL     	    : WWW.FPGATECHSOLUTION.COM
+----------------------------------------------------------------------------------
+--
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+
+
+ENTITY TOP IS
+   
+	PORT ( RESET : IN  STD_LOGIC;
+           CLK_555 : IN  STD_LOGIC;
+           CLK_12MHZ : IN  STD_LOGIC;
+			  SIG_PD : OUT STD_LOGIC;
+			  LCD_DIP: IN  STD_LOGIC;
+				SIG_A : OUT STD_LOGIC;
+				SIG_B : OUT STD_LOGIC;
+				SIG_C : OUT STD_LOGIC;
+				SIG_D : OUT STD_LOGIC;
+				SIG_E : OUT STD_LOGIC;
+				SIG_F : OUT STD_LOGIC;
+				SIG_G : OUT STD_LOGIC;
+				SEL_DISP1 : OUT STD_LOGIC;
+				SEL_DISP2 : OUT STD_LOGIC;
+				SEL_DISP3 : OUT STD_LOGIC;
+				SEL_DISP4 : OUT STD_LOGIC;
+		
+				MISO : IN STD_LOGIC;          
+				MOSI : OUT STD_LOGIC;
+				SCK: OUT STD_LOGIC;
+				CS_DAC: OUT STD_LOGIC;
+
+				CHA_NO : IN  STD_LOGIC_VECTOR (1 DOWNTO 0);
+            DIP_LED : IN  STD_LOGIC_VECTOR (7 DOWNTO 0));
+END TOP;
+
+ARCHITECTURE BEHAVIORAL OF TOP IS	COMPONENT SEVEN_SEGMENT
+	PORT(
+		CLK_32KHZ : IN STD_LOGIC;
+		RESET : IN STD_LOGIC;
+		DATA_DISP_1 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		DATA_DISP_2 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		DATA_DISP_3 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		DATA_DISP_4 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		DATA_DISP_5 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		DATA_DISP_6 : IN STD_LOGIC_VECTOR(3 DOWNTO 0);          
+		SIG_PD : OUT STD_LOGIC;
+		SIG_A : OUT STD_LOGIC;
+		SIG_B : OUT STD_LOGIC;
+		SIG_C : OUT STD_LOGIC;
+		SIG_D : OUT STD_LOGIC;
+		SIG_E : OUT STD_LOGIC;
+		SIG_F : OUT STD_LOGIC;
+		SIG_G : OUT STD_LOGIC;
+		SEL_DISP1 : OUT STD_LOGIC;
+		SEL_DISP2 : OUT STD_LOGIC;
+		SEL_DISP3 : OUT STD_LOGIC;
+		SEL_DISP4 : OUT STD_LOGIC;
+		SEL_DISP5 : OUT STD_LOGIC;
+		SEL_DISP6 : OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+	COMPONENT LCD_CONTROL
+	PORT(
+		RESET : IN STD_LOGIC;
+		CLK_12MHZ : IN STD_LOGIC;
+		C1L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C2L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C3L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C4L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C5L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C6L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C7L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C8L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C9L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C10L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C11L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C12L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C13L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C14L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C15L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C16L1 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C1L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C2L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C3L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C4L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C5L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C6L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C7L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C8L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C9L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C10L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C11L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C12L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C13L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C14L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C15L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+		C16L2 : IN STD_LOGIC_VECTOR(7 DOWNTO 0);          
+		LCD_RS : OUT STD_LOGIC;
+		LCD_E : OUT STD_LOGIC;
+		LCD_RW : OUT STD_LOGIC;
+		DATA_BUS : OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+		);
+	END COMPONENT;
+
+	COMPONENT DAC
+	PORT(
+		CLK : IN STD_LOGIC;
+		RESET : IN STD_LOGIC;
+		DAC_CHANNEL : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+		DAC_DATA : IN STD_LOGIC_VECTOR(7 DOWNTO 0);          
+		DAC_CLK : OUT STD_LOGIC;
+		DAC_CS : OUT STD_LOGIC;
+		DAC_MOSI : OUT STD_LOGIC
+		);
+	END COMPONENT;
+
+
+ 	COMPONENT BINBCD16
+	PORT(
+		B : IN STD_LOGIC_VECTOR(15 DOWNTO 0);          
+		P : OUT STD_LOGIC_VECTOR(18 DOWNTO 0)
+		);
+	END COMPONENT;
+
+
+
+SIGNAL B1,B2,B3,B4,B5:STD_LOGIC_VECTOR (7 DOWNTO 0);
+SIGNAL DATA_BUS,DAC_DATA:STD_LOGIC_VECTOR (7 DOWNTO 0);
+SIGNAL SIG_A1,SIG_B1,SIG_C1,SIG_D1,SIG_E1,SIG_F1,SIG_G1,SIG_PD1,SEL_DISP11,SEL_DISP22,SEL_DISP33,SEL_DISP44:STD_LOGIC;
+
+SIGNAL LCD_RS,LCD_E:STD_LOGIC;
+SIGNAL TMP_SIG:STD_LOGIC_VECTOR (14 DOWNTO 0);
+ SIGNAL BCD:STD_LOGIC_VECTOR(18 DOWNTO 0);
+SIGNAL COUNT_VAL1:STD_LOGIC_VECTOR(15 DOWNTO 0);
+SIGNAL DATA_OUT_ADC:STD_LOGIC_VECTOR(9 DOWNTO 0);
+
+SIGNAL TEST_CS_ADC:STD_LOGIC;
+SIGNAL TEST_ADC_IN:STD_LOGIC;
+SIGNAL TEST_ADC_OUT:STD_LOGIC;
+SIGNAL TEST_SCK:STD_LOGIC;
+
+BEGIN
+
+---------------------------------------------------------------------------------------
+-------------------------SEVEN SEGMENT-------------------------------------------------
+---------------------------------------------------------------------------------------
+
+
+
+	INST_SEVEN_SEGMENT: SEVEN_SEGMENT PORT MAP(
+		CLK_32KHZ =>CLK_12MHZ ,
+		RESET =>RESET ,
+		SIG_PD =>SIG_PD1 ,
+		SIG_A =>SIG_A1 ,
+		SIG_B => SIG_B1,
+		SIG_C =>SIG_C1 ,
+		SIG_D =>SIG_D1 ,
+		SIG_E =>SIG_E1 ,
+		SIG_F =>SIG_F1 ,
+		SIG_G =>SIG_G1 ,
+		SEL_DISP1 =>SEL_DISP11 ,
+		SEL_DISP2 =>SEL_DISP22 ,
+		SEL_DISP3 =>SEL_DISP3 ,
+		SEL_DISP4 =>SEL_DISP4 ,
+		SEL_DISP5 =>OPEN ,
+		SEL_DISP6 =>OPEN ,
+		DATA_DISP_1 =>BCD( 15 DOWNTO 12) ,
+		DATA_DISP_2 =>BCD( 11 DOWNTO 8) ,
+		DATA_DISP_3 =>BCD( 7 DOWNTO 4) ,
+		DATA_DISP_4 =>BCD( 3 DOWNTO 0) ,
+		DATA_DISP_5 =>"0001",
+		DATA_DISP_6 =>"0001"
+);
+
+
+
+
+
+DAC_DATA<=DIP_LED;
+
+
+		SIG_PD <=SIG_PD1 WHEN LCD_DIP='1' ELSE DATA_BUS(0);
+		SIG_A <=SIG_G1  WHEN LCD_DIP='1' ELSE DATA_BUS(3);
+		SIG_B <= SIG_F1 WHEN LCD_DIP='1' ELSE DATA_BUS(2);
+		SIG_C <=SIG_E1  WHEN LCD_DIP='1' ELSE DATA_BUS(1);
+		SIG_D <=SIG_D1  WHEN LCD_DIP='1' ELSE DATA_BUS(4);
+		SIG_E <=SIG_C1  WHEN LCD_DIP='1' ELSE DATA_BUS(5);
+		SIG_F <=SIG_B1  WHEN LCD_DIP='1' ELSE DATA_BUS(7);
+		SIG_G <=SIG_A1  WHEN LCD_DIP='1' ELSE DATA_BUS(6);
+		SEL_DISP1 <=SEL_DISP11  WHEN LCD_DIP='1' ELSE LCD_E;
+		SEL_DISP2 <=SEL_DISP22  WHEN LCD_DIP='1' ELSE LCD_RS;
+
+
+
+---------------------------------------------------------------------------------------
+-------------------------LCD CONTROL---------------------------------------------------
+---------------------------------------------------------------------------------------
+
+	INST_LCD: LCD_CONTROL PORT MAP(
+		RESET =>RESET ,
+		CLK_12MHZ =>CLK_12MHZ ,
+		LCD_RS =>LCD_RS ,
+		LCD_E =>LCD_E ,
+		LCD_RW =>OPEN ,
+		C1L1 =>X"20",
+		C2L1 =>X"20" ,
+		C3L1 =>X"46"  ,
+		C4L1 =>X"50"  ,
+		C5L1 =>X"47"  ,
+		C6L1 =>X"41"  ,
+		C7L1 =>X"53"  ,
+		C8L1 =>X"4F"  ,
+		C9L1 =>X"4C"  ,
+		C10L1 =>X"55"  ,
+		C11L1 =>X"54"  ,
+		C12L1 =>X"49"  ,
+		C13L1 =>X"4F"  ,
+		C14L1 =>X"4E"  ,
+		C15L1 =>X"20" ,
+		C16L1 =>X"20" ,
+		
+		C1L2 =>X"20" ,
+		C2L2 =>X"20" ,
+		C3L2 =>X"20" ,
+		C4L2 =>X"20" ,
+		C5L2 =>X"20" ,
+		C6L2 =>X"50" ,
+		C7L2 =>X"55"  ,
+		C8L2 =>X"4E"  ,
+		C9L2 =>X"45"  ,
+		C10L2 =>X"20" ,
+		C11L2 =>B1 ,
+		C12L2 =>B2 ,
+		C13L2 =>B3 ,
+		C14L2 =>B4 ,
+		C15L2 =>X"20" ,
+		C16L2 =>X"20" ,
+		DATA_BUS =>DATA_BUS 
+	);
+
+
+
+
+---------------------------------------------------------------------------------------
+-------------------------ASCII CONVERTOR-----------------------------------------------
+---------------------------------------------------------------------------------------
+
+B4<=("0011" & BCD( 3 DOWNTO 0));
+B3<=("0011" & BCD( 7 DOWNTO 4));
+B2<=("0011" & BCD( 11 DOWNTO 8));
+B1<=("0011" & BCD( 15 DOWNTO 12));
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+-------------------------DAC CONTROL---------------------------------------------------
+---------------------------------------------------------------------------------------
+
+
+	INST_DAC: DAC PORT MAP(
+		CLK =>CLK_12MHZ ,
+		RESET =>RESET ,
+		DAC_CLK =>SCK ,
+		DAC_CS => CS_DAC,
+		DAC_MOSI =>MOSI ,
+		DAC_CHANNEL =>CHA_NO ,
+		DAC_DATA =>DAC_DATA 
+	);
+	
+
+---------------------------------------------------------------------------------------
+-------------------------BINARY TO BCD---------------------------------------------------
+---------------------------------------------------------------------------------------
+
+
+
+	INST_BINBCD16: BINBCD16 PORT MAP(
+		B => COUNT_VAL1,
+		P =>BCD 
+	);
+COUNT_VAL1<=("00000000" & DAC_DATA(0) & DAC_DATA(1) & DAC_DATA(2) & DAC_DATA(3) & DAC_DATA(4) & DAC_DATA(5) & DAC_DATA(6) &  DAC_DATA(7) );
+
+END BEHAVIORAL;
+

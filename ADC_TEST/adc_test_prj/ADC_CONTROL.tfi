@@ -1,0 +1,18 @@
+
+
+
+// Instantiate the module
+ADC_CONTROL instance_name (
+    .CLK(CLK), 
+    .RESET(RESET), 
+    .ADC_CLOCK(ADC_CLOCK), 
+    .ADC_CS(ADC_CS), 
+    .SPI_MISO(SPI_MISO), 
+    .SPI_MOSI(SPI_MOSI), 
+    .DATA_OUT_CH0(DATA_OUT_CH0), 
+    .DATA_OUT_CH1(DATA_OUT_CH1), 
+    .DATA_OUT_CH2(DATA_OUT_CH2), 
+    .DATA_OUT_CH3(DATA_OUT_CH3)
+    );
+
+
